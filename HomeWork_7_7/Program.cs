@@ -11,7 +11,7 @@ namespace HomeWork_7_7
         {
             Army army = new Army();
             army.TransferSoldier();
-            army.ShowArmy();
+            army.Start();
         }
     }
     internal class Army
@@ -58,28 +58,30 @@ namespace HomeWork_7_7
             _squadSoldiers1 = _squadSoldiers1.Except(squad).ToList();
         }
 
-        public void ShowArmy()
+        public void Start()
         {
             Console.WriteLine($"Squad Solisers1:");
-
-            foreach (Soldier solider in _squadSoldiers1)
-            {
-                solider.ShowInfo();
-            }
+            ShowArmy(_squadSoldiers1);
             Console.WriteLine($"\nSquad Solisers2:");
+            ShowArmy(_squadSoldiers2);
+            Console.ReadLine();
+        }
 
-            foreach (Soldier solider in _squadSoldiers2)
+        private void ShowArmy(List<Soldier> soldiers)
+        {
+            foreach (Soldier solider in soldiers)
             {
                 solider.ShowInfo();
             }
-            Console.ReadLine();
         }
     }
 
     class Soldier
     {
         public string Name { get; private set; }
+
         public Soldier(string name) => Name = name;
+
         public void ShowInfo() => Console.WriteLine($"Name:{Name}");
     }
 }
